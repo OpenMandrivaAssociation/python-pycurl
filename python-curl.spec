@@ -8,7 +8,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://pycurl.sourceforge.net/download/%{oname}-%{version}.tar.gz
-License: LGPLv2.1+
+License: LGPLv2+
 Group: Development/Python
 BuildRoot: %{_tmppath}/%{name}-buildroot
 Url: http://pycurl.sourceforge.net/
