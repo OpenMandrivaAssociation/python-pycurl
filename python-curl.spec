@@ -1,15 +1,14 @@
 %define name python-curl
-%define version 7.15.5.1
-%define cvs 20061108
-%define release %mkrel 1.%cvs.1
+%define version 7.16.4
+%define release %mkrel 1
 %define oname pycurl
 
 Summary: PycURL -- cURL library module for Python
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: http://pycurl.sourceforge.net/download/%{oname}-%{cvs}.tar.bz2
-License: LGPL
+Source0: http://pycurl.sourceforge.net/download/%{oname}-%{version}.tar.gz
+License: LGPLv2.1+
 Group: Development/Python
 BuildRoot: %{_tmppath}/%{name}-buildroot
 Url: http://pycurl.sourceforge.net/
@@ -21,7 +20,7 @@ BuildRequires: python-devel
 This module provides Python bindings for the cURL library.
 
 %prep
-%setup -q -n %oname
+%setup -q -n %oname-%version
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
