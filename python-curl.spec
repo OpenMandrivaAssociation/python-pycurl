@@ -1,42 +1,43 @@
-%define name python-curl
-%define version 7.16.4
-%define release %mkrel 1
-%define oname pycurl
+%define module curl
 
-Summary: PycURL -- cURL library module for Python
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: http://pycurl.sourceforge.net/download/%{oname}-%{version}.tar.gz
-License: LGPLv2+
-Group: Development/Python
-BuildRoot: %{_tmppath}/%{name}-buildroot
-Url: http://pycurl.sourceforge.net/
-BuildRequires: curl-devel
-BuildRequires: curl >= 7.13.2
-BuildRequires: python-devel
+Summary:	A Python interface to libcurl
+Name:		python-%{module}
+Version:	7.16.4
+Release:	%mkrel 1
+Group:		Development/Languages
+License:	LGPLv2+
+URL:		http://pycurl.sourceforge.net
+Source0:	http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
+BuildRequires:  python-devel
+BuildRequires:  curl-devel >= 7.16.0
+%py_requires -d
+BuildRoot:      %{_tmppath}/%{name}-%{version}-buildroot
 
 %description
-This module provides Python bindings for the cURL library.
+PycURL is a Python interface to libcurl. PycURL can be used to fetch
+objects identified by a URL from a Python program, similar to the
+urllib Python module. PycURL is mature, very fast, and supports a lot
+of features.
 
 %prep
-%setup -q -n %oname-%version
+%setup -qn pycurl-%{version}
+chmod a-x examples/*
 
 %build
-env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
+env CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL" %{__python} setup.py build
+
+%check
+%{__python} tests/test_internals.py -q
 
 %install
-rm -rf %buildroot installed-docs
-python setup.py install --root=$RPM_BUILD_ROOT
-mv %buildroot%_datadir/doc/pycurl installed-docs
-
+rm -rf %{buildroot}
+%{__python} setup.py install --skip-build --root=%{buildroot} --optimize=2
+rm -rf %{buildroot}%{_datadir}/doc/pycurl
+ 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc installed-docs/*
-%py_platsitedir/curl/
-%py_platsitedir/*
-
-
+%doc COPYING ChangeLog README TODO examples doc tests
+%{python_sitearch}/*
