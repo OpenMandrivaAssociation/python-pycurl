@@ -11,6 +11,7 @@ Source0:	http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
 BuildRequires:  python-devel
 BuildRequires:  curl-devel >= 7.16.0
 %py_requires -d
+BuildRoot:      %{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 PycURL is a Python interface to libcurl. PycURL can be used to fetch
