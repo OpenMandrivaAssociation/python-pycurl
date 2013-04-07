@@ -3,7 +3,7 @@
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
 Version:	7.19.0
-Release:	9
+Release:	10
 Group:		Development/Python
 License:	LGPLv2+
 URL:		http://pycurl.sourceforge.net
@@ -11,6 +11,8 @@ Source0:	http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
 # Ugly hack to get libs necessary to compile libcurl 
 #   but avoid linking with libcurl.a
 Patch0:		pycurl-7.19.0-no-static-libcurl.patch
+Patch1:		python-curl-fix-do_curl_reset-refcount.patch
+Patch2:		pycurl-7.19.0-link.patch
 BuildRequires:  python-devel
 BuildRequires:  curl-devel >= 7.19.0
 %py_requires -d

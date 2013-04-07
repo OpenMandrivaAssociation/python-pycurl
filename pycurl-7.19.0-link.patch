@@ -1,0 +1,10 @@
+--- a/setup.py~	2012-12-12 23:54:56.861057911 +0800
++++ a/setup.py	2012-12-12 23:55:30.041923653 +0800
+@@ -114,6 +114,7 @@
+             define_macros.append(('HAVE_CURL_SSL', 1))
+     if not libraries:
+         libraries.append("curl")
++    libraries.append("crypto")
+     # Add extra compile flag for MacOS X
+     if sys.platform[:-1] == "darwin":
+         extra_link_args.append("-flat_namespace")
