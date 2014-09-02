@@ -2,17 +2,13 @@
 
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
-Version:	7.19.0
-Release:	16
+Version:	7.19.5
+Release:	1
 Group:		Development/Python
 License:	LGPLv2+
 Url:		http://pycurl.sourceforge.net
 Source0:	http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
-# Ugly hack to get libs necessary to compile libcurl 
-#   but avoid linking with libcurl.a
-Patch0:		pycurl-7.19.0-no-static-libcurl.patch
-Patch1:		python-curl-fix-do_curl_reset-refcount.patch
-Patch2:		pycurl-7.19.0-link.patch
+Patch2:		pycurl-7.19.5-link.patch
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(python)
 Provides:	python-pycurl = %{version}-%{release}
@@ -25,20 +21,21 @@ of features.
 
 %prep
 %setup -qn pycurl-%{version}
-chmod a-x examples/*
+chmod a-x examples/*py
 %apply_patches
 
 %build
-env CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL" %{__python} setup.py build
+env CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL" python setup.py build
 
 %check
-%{__python} tests/test_internals.py -q
+export PYTHONPATH=%{buildroot}%{py_platsitedir}
+python -c 'import py%{module}; print(py%{module}.version)'
 
 %install
-%{__python} setup.py install --skip-build --root=%{buildroot} --optimize=2
+python setup.py install --skip-build --root=%{buildroot} --optimize=2
 rm -rf %{buildroot}%{_datadir}/doc/pycurl
  
 %files
-%doc COPYING ChangeLog README TODO examples doc tests
-%{python_sitearch}/*
+%doc COPYING-LGPL COPYING-MIT ChangeLog README.rst examples doc
+%{py_platsitedir}/*
 

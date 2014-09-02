@@ -1,2 +1,4 @@
+removed_sources:
+  pycurl-7.19.0.tar.gz: 3fb59eca1461331bb9e9e8d6fe3b23eda961a416
 sources:
-  "pycurl-7.19.0.tar.gz": 3fb59eca1461331bb9e9e8d6fe3b23eda961a416
+  pycurl-7.19.5.tar.gz: ec36d55a99db9a49fede3bfa27ee16a4f5dc7bef
