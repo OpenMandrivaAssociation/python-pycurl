@@ -10,7 +10,7 @@ Url:		http://pycurl.sourceforge.net
 Source0:	http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
 Patch2:		pycurl-7.19.5-link.patch
 BuildRequires:	pkgconfig(libcurl)
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 Provides:	python-pycurl = %{version}-%{release}
 
 %description
