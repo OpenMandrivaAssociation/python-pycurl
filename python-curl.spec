@@ -3,7 +3,7 @@
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
 Version:	7.19.5
-Release:	2
+Release:	3
 Group:		Development/Python
 License:	LGPLv2+
 Url:		http://pycurl.sourceforge.net
