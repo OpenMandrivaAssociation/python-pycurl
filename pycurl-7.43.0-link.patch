@@ -1,0 +1,11 @@
+--- pycurl-7.43.0/setup.py.orig	2016-03-04 20:46:29.665818237 +0000
++++ pycurl-7.43.0/setup.py	2016-03-04 20:46:49.322816980 +0000
+@@ -264,6 +264,8 @@
+         if not self.libraries:
+             self.libraries.append("curl")
+ 
++        self.libraries.append("crypto")
++
+         # Add extra compile flag for MacOS X
+         if sys.platform[:-1] == "darwin":
+             self.extra_link_args.append("-flat_namespace")
