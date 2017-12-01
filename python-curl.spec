@@ -3,11 +3,11 @@
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
 Version:	7.43.0
-Release:	2
+Release:	3
 Group:		Development/Python
 License:	LGPLv2+
-Url:		http://pycurl.sourceforge.net
-Source0:	http://pycurl.sourceforge.net/download/pycurl-%{version}.tar.gz
+Url:		http://pycurl.io
+Source0:	http://dl.bintray.com/pycurl/pycurl/pycurl-%{version}.tar.gz
 Patch1:		pycurl-7.43.0-link.patch
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(python3)
