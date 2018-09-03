@@ -11,7 +11,8 @@ Source0:	http://dl.bintray.com/pycurl/pycurl/pycurl-%{version}.tar.gz
 Patch1:		pycurl-7.43.0-link.patch
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(python3)
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python2)
+BuildRequires:	pkgconfig(openssl)
 Provides:	python-pycurl = %{version}-%{release}
 
 %description
