@@ -2,12 +2,12 @@
 
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
-Version:	7.43.0
-Release:	6
+Version:	7.43.0.1
+Release:	1
 Group:		Development/Python
 License:	LGPLv2+
 Url:		http://pycurl.io
-Source0:	http://dl.bintray.com/pycurl/pycurl/pycurl-%{version}.tar.gz
+Source0:	https://pypi.io/packages/source/p/pycurl/pycurl-%{version}.tar.gz
 Patch1:		pycurl-7.43.0-link.patch
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(python3)
@@ -51,7 +51,7 @@ env CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL" python2 setup.py build
 popd
 
 pushd python3
-env CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL" python3 setup.py build
+env CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL" %py3_build
 
 %check
 export PYTHONPATH=%{buildroot}%{py_platsitedir}
@@ -75,4 +75,3 @@ rm -rf %{buildroot}%{_datadir}/doc/pycurl
 %files -n python2-curl
 %doc python2/COPYING-LGPL python2/COPYING-MIT python2/ChangeLog python2/README.rst python2/examples python2/doc
 %{py2_platsitedir}/
-
