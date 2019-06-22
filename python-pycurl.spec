@@ -1,4 +1,4 @@
-%define module curl
+%define module pycurl
 
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
@@ -13,7 +13,7 @@ BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(python2)
 BuildRequires:	pkgconfig(openssl)
-Provides:	python-pycurl = %{version}-%{release}
+Provides:	python-curl = %{version}-%{release}
 
 %description
 PycURL is a Python interface to libcurl. PycURL can be used to fetch
@@ -21,12 +21,12 @@ objects identified by a URL from a Python program, similar to the
 urllib Python module. PycURL is mature, very fast, and supports a lot
 of features.
 
-%package -n python2-curl
+%package -n python2-%{module}
 Summary:        A Python interface to libcurl
 Group:          Development/Python
 License:        LGPLv2+
 
-%description -n python2-curl
+%description -n python2-%{module}
 PycURL is a Python interface to libcurl. PycURL can be used to fetch
 objects identified by a URL from a Python program, similar to the
 urllib Python module. PycURL is mature, very fast, and supports a lot
@@ -55,7 +55,7 @@ env CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL" %py3_build
 
 %check
 export PYTHONPATH=%{buildroot}%{py_platsitedir}
-python -c 'import py%{module}; print(py%{module}.version)'
+python -c 'import %{module}; print(%{module}.version)'
 
 %install
 
@@ -72,6 +72,6 @@ rm -rf %{buildroot}%{_datadir}/doc/pycurl
 %doc python2/COPYING-LGPL python2/COPYING-MIT python2/ChangeLog python2/README.rst python2/examples python2/doc
 %{py_platsitedir}/*
 
-%files -n python2-curl
+%files -n python2-%{module}
 %doc python2/COPYING-LGPL python2/COPYING-MIT python2/ChangeLog python2/README.rst python2/examples python2/doc
 %{py2_platsitedir}/
