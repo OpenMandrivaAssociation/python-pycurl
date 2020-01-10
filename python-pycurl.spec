@@ -38,7 +38,7 @@ mv pycurl-%{version} python2
 pushd python2
 
 chmod a-x examples/*py
-%apply_patches
+%autopatch -p1
 
 popd
 
