@@ -2,18 +2,18 @@
 
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
-Version:	7.43.0.3
+Version:	7.43.0.5
 Release:	2
 Group:		Development/Python
 License:	LGPLv2+
 Url:		http://pycurl.io
-Source0:	https://files.pythonhosted.org/packages/ac/b3/0f3979633b7890bab6098d84c84467030b807a1e2b31f5d30103af5a71ca/pycurl-7.43.0.3.tar.gz
+Source0:	https://dl.bintray.com/pycurl/pycurl/pycurl-%{version}.tar.gz
 Patch1:		pycurl-7.43.0-link.patch
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(python2)
 BuildRequires:	pkgconfig(openssl)
-Provides:	python-curl = %{version}-%{release}
+%rename	python-curl
 
 %description
 PycURL is a Python interface to libcurl. PycURL can be used to fetch

@@ -1,11 +1,12 @@
---- pycurl-7.43.0/setup.py.orig	2016-03-04 20:46:29.665818237 +0000
-+++ pycurl-7.43.0/setup.py	2016-03-04 20:46:49.322816980 +0000
-@@ -264,6 +264,8 @@
+diff -up python2/setup.py.1~ python2/setup.py
+--- python2/setup.py.1~	2020-02-24 19:21:39.462620688 +0100
++++ python2/setup.py	2020-02-24 19:23:04.374619450 +0100
+@@ -344,6 +344,8 @@ manually. For other SSL backends please
          if not self.libraries:
              self.libraries.append("curl")
  
 +        self.libraries.append("crypto")
 +
          # Add extra compile flag for MacOS X
-         if sys.platform[:-1] == "darwin":
+         if sys.platform.startswith('darwin'):
              self.extra_link_args.append("-flat_namespace")
