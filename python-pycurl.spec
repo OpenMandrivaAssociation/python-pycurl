@@ -2,7 +2,7 @@
 
 Summary:	A Python interface to libcurl
 Name:		python-%{module}
-Version:	7.45.1
+Version:	7.45.2
 Release:	1
 Group:		Development/Python
 License:	LGPLv2+
