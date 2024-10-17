@@ -6,7 +6,7 @@ Version:	7.45.3
 Release:	1
 Group:		Development/Python
 License:	LGPLv2+
-Url:		http://pycurl.io
+Url:		https://pycurl.io
 Source0:	https://files.pythonhosted.org/packages/source/p/pycurl/pycurl-%{version}.tar.gz
 Patch1:		pycurl-7.43.0-link.patch
 BuildRequires:	pkgconfig(libcurl)
