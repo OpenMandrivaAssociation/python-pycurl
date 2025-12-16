@@ -1,17 +1,23 @@
 %define module pycurl
 
 Summary:	A Python interface to libcurl
-Name:		python-%{module}
-Version:	7.45.3
-Release:	2
+Name:		python-pycurl
+Version:	7.45.7
+Release:	1
 Group:		Development/Python
-License:	LGPLv2+
+License:	LGPL-2.0-or-later OR MIT
 Url:		https://pycurl.io
-Source0:	https://files.pythonhosted.org/packages/source/p/pycurl/pycurl-%{version}.tar.gz
-Patch1:		pycurl-7.43.0-link.patch
+Source0:	https://files.pythonhosted.org/packages/source/p/%{module}/%{module}-%{version}.tar.gz
+#Patch1:		pycurl-7.43.0-link.patch
+BuildSystem:	python
+BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(libcurl)
-BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(python)
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(wheel)
+
 %rename	python-curl
 
 %description
@@ -21,11 +27,14 @@ urllib Python module. PycURL is mature, very fast, and supports a lot
 of features.
 
 %prep
-%autosetup -p1 -n pycurl-%{version}
+%autosetup -n %{module}-%{version} -p1
+# Remove bundled egg-info
+rm -rf %{module}.egg-info
 chmod a-x examples/*py
 
 %build
 export CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL"
+export LDFLAGS="%{ldflags} -lpython%{py_ver}"
 %py_build
 
 %check
@@ -33,10 +42,12 @@ export PYTHONPATH=%{buildroot}%{py_platsitedir}
 python -c 'import %{module}; print(%{module}.version)'
 
 %install
-python setup.py install --skip-build --root=%{buildroot} --optimize=2
- 
+%py_install
+
 %files
-%{py_platsitedir}/pycurl*.egg-info
-%{py_platsitedir}/pycurl.*.so
-%{py_platsitedir}/curl
 %doc %{_docdir}/pycurl
+%doc README.rst
+%license COPYING-MIT COPYING-LGPL
+%{python_sitearch}/%{module}-%{version}.dist-info
+%{python_sitearch}/%{module}.*.so
+%{python_sitearch}/curl
