@@ -1,14 +1,16 @@
 %define module pycurl
+%bcond tests 1
 
-Summary:	A Python interface to libcurl
 Name:		python-pycurl
-Version:	7.45.7
+Summary:	A Python interface to libcurl
+Version:	7.46.0
 Release:	1
+License:	LGPL-2.1-or-later OR MIT
 Group:		Development/Python
-License:	LGPL-2.0-or-later OR MIT
-Url:		https://pycurl.io
-Source0:	https://files.pythonhosted.org/packages/source/p/%{module}/%{module}-%{version}.tar.gz
-#Patch1:		pycurl-7.43.0-link.patch
+URL:		https://pycurl.io
+Source0:	https://files.pythonhosted.org/packages/source/p/%{module}/%{module}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
+# Upstream repo: https://github.com/pycurl/pycurl
+
 BuildSystem:	python
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(libcurl)
@@ -26,28 +28,25 @@ objects identified by a URL from a Python program, similar to the
 urllib Python module. PycURL is mature, very fast, and supports a lot
 of features.
 
-%prep
-%autosetup -n %{module}-%{version} -p1
+%prep -a
 # Remove bundled egg-info
 rm -rf %{module}.egg-info
 chmod a-x examples/*py
 
-%build
-export CFLAGS="%{optflags} -DHAVE_CURL_OPENSSL"
-export LDFLAGS="%{ldflags} -lpython%{py_ver}"
-%py_build
+%build -p
+export PYCURL_SSL_LIBRARY=openssl
+export LDFLAGS="%{ldflags} -lpython%{pyver}"
+
+%install -a
+# Remove files installed into wrong location
+rm -rf %{buildroot}%{_docdir}/pycurl
 
 %check
-export PYTHONPATH=%{buildroot}%{py_platsitedir}
-python -c 'import %{module}; print(%{module}.version)'
-
-%install
-%py_install
+export PYTHONPATH=%{buildroot}%{python_sitearch}
+%__python -c 'import %{module}; print(%{module}.version)'
 
 %files
-%doc %{_docdir}/pycurl
-%doc README.rst
-%license COPYING-MIT COPYING-LGPL
-%{python_sitearch}/%{module}-%{version}.dist-info
-%{python_sitearch}/%{module}.*.so
+%doc README.rst examples doc/*.rst
 %{python_sitearch}/curl
+%{python_sitearch}/%{module}.*.so
+%{python_sitearch}/%{module}-%{version}.dist-info
