@@ -3,8 +3,8 @@
 
 Name:		python-pycurl
 Summary:	A Python interface to libcurl
-Version:	7.46.0
-Release:	2
+Version:	7.47.0
+Release:	1
 License:	LGPL-2.1-or-later OR MIT
 Group:		Development/Python
 URL:		https://pycurl.io
