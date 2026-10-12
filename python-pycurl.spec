@@ -48,5 +48,5 @@ export PYTHONPATH=%{buildroot}%{python_sitearch}
 %files
 %doc README.rst examples doc/*.rst
 %{python_sitearch}/curl
-%{python_sitearch}/%{module}.*.so
+%{python_sitearch}/%{module}
 %{python_sitearch}/%{module}-%{version}.dist-info
